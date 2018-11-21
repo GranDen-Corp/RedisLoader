@@ -13,6 +13,11 @@ namespace VerifyRedisLoaderWebApp
 {
     public class Program
     {
+        private const string conn =
+            @"localhost:6379";
+
+        private const string redisHashKey = "yaml_config";
+
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
@@ -24,14 +29,14 @@ namespace VerifyRedisLoaderWebApp
                 {
                     /*
                      The example redis has following hash content:
-                       HSET "tutorialspoint" "name" "redis tutorial"
-                       HSET "tutorialspoint" "description" "redis basic commands for caching"
-                       HSET "tutorialspoint" "likes" "20"
-                       HSET "tutorialspoint" "visitors" "23000"
-                       HSET "tutorialspoint" "test" "abc123"
+                       HSET "yaml_config" "name" "redis tutorial"
+                       HSET "yaml_config" "description" "redis basic commands for caching"
+                       HSET "yaml_config" "likes" "20"
+                       HSET "yaml_config" "visitors" "23000"
+                       HSET "yaml_config" "test" "abc123"
                      */
 
-                    builder.AddRedis("localhost:6379", "tutorialspoint", true);
+                    builder.AddRedis(conn, redisHashKey, true, "aligala_curDbNum");
                 })
                 .UseStartup<Startup>();
     }

@@ -24,6 +24,11 @@ namespace GranDen.RedisLoader
         /// The factory of <see cref="IConnectionMultiplexer"/> for database access.
         /// </summary>
         public Func<IConnectionMultiplexer> ConnectionFactory { get; set; }
+        
+        /// <summary>
+        /// For specified the Redis key-value string which store the current DB number that has valid Game Table Data
+        /// </summary>
+        public string CurrentRedisDbNumKey { get; set; }
 
         /// <summary>
         /// Builds the <see cref="RedisConfigurationSource"/> for this source.
@@ -32,7 +37,7 @@ namespace GranDen.RedisLoader
         /// <returns>A <see cref="RedisConfigurationProvider"/></returns>
         public IConfigurationProvider Build(IConfigurationBuilder builder)
         {
-            return new RedisConfigurationProvider(ConnectionFactory, Key, ReloadOnChange);
+            return new RedisConfigurationProvider(ConnectionFactory, Key, ReloadOnChange, CurrentRedisDbNumKey);
         }
     }
 }

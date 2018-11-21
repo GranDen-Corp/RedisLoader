@@ -15,13 +15,14 @@ namespace GranDen.RedisLoader
         /// <param name="builder">The <see cref="IConfigurationBuilder"/> to add to.</param>
         /// <param name="configuration">The configuration used to connect to Redis.</param>
         /// <param name="key">The Redis key used for configuration.</param>
-        /// <param name="reloadOnChange">Determines whether the source will be loaded if the underlying configuration changes. 
+        /// <param name="reloadOnChange">Determines whether the source will be loaded if the underlying configuration changes.
         /// Requires the Redis Keyspace Notifications feature enabled on the Redis server. 
         /// <code>CONFIG SET notify-keyspace-events Kh</code>. 
         /// See http://redis.io/topics/notifications for details. 
         /// </param>
+        /// <param name="currentRedisDbNumKey">Specified the key that store Redis Db Number that current valid Game Table Data resided.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder AddRedis(this IConfigurationBuilder builder, string configuration, string key, bool reloadOnChange = false)
+        public static IConfigurationBuilder AddRedis(this IConfigurationBuilder builder, string configuration, string key, bool reloadOnChange = false, string currentRedisDbNumKey = null)
         {
             if (builder == null)
             {
@@ -38,16 +39,17 @@ namespace GranDen.RedisLoader
                 throw new ArgumentException("Redis hash key must be a non-empty string.", nameof(key));
             }
 
-            return builder.AddRedis(() => ConnectionMultiplexer.Connect(configuration), key, reloadOnChange);
+            return builder.AddRedis(() => ConnectionMultiplexer.Connect(configuration), key, reloadOnChange, currentRedisDbNumKey);
         }
 
-        private static IConfigurationBuilder AddRedis(this IConfigurationBuilder builder, Func<IConnectionMultiplexer> connectionFactory, string key, bool reloadOnChange)
+        private static IConfigurationBuilder AddRedis(this IConfigurationBuilder builder, Func<IConnectionMultiplexer> connectionFactory, string key, bool reloadOnChange, string currentRedisDbNumKey)
         {
             var source = new RedisConfigurationSource()
             {
                 Key = key,
                 ReloadOnChange = reloadOnChange,
-                ConnectionFactory = connectionFactory
+                ConnectionFactory = connectionFactory,
+                CurrentRedisDbNumKey = currentRedisDbNumKey
             };
 
             builder.Add(source);

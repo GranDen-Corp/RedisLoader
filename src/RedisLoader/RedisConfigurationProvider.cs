@@ -16,13 +16,17 @@ namespace GranDen.RedisLoader
 
         private IConnectionMultiplexer _connection;
         private IDatabase _database;
+        private int _dbNum;
+        private readonly string _currentRedisDbNumKey;
+
 
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        public RedisConfigurationProvider(Func<IConnectionMultiplexer> connectionFactory, string key, bool reloadOnChange)
+        public RedisConfigurationProvider(Func<IConnectionMultiplexer> connectionFactory, string key, bool reloadOnChange, string currentRedisDbNumKey = null)
         {
+            _currentRedisDbNumKey = currentRedisDbNumKey;
             _connectionFactory = connectionFactory ?? throw new ArgumentNullException(nameof(connectionFactory));
             _key = key ?? throw new ArgumentNullException(nameof(key));
 
@@ -47,6 +51,13 @@ namespace GranDen.RedisLoader
         {
             Connect();
 
+            var data = GetTableData();
+
+            Data = data;
+        }
+
+        private Dictionary<string, string> GetTableData()
+        {
             var hash = _database.HashGetAll(_key);
             var data = new Dictionary<string, string>(hash.Length, StringComparer.OrdinalIgnoreCase);
             foreach (var entry in hash)
@@ -54,7 +65,7 @@ namespace GranDen.RedisLoader
                 data.Add(entry.Name, entry.Value);
             }
 
-            Data = data;
+            return data;
         }
 
         private void Reload()
@@ -68,7 +79,17 @@ namespace GranDen.RedisLoader
             if (_connection == null)
             {
                 _connection = _connectionFactory();
-                _database = _connection.GetDatabase();
+
+                if (!string.IsNullOrEmpty(_currentRedisDbNumKey))
+                {
+                    var keyDb = _connection.GetDatabase();
+                    if (keyDb.KeyExists(_currentRedisDbNumKey))
+                    {
+                        _dbNum = int.Parse(keyDb.StringGet(_currentRedisDbNumKey));
+                    }
+                }
+
+                _database = _connection.GetDatabase(_dbNum);
             }
         }
     }
