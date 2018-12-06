@@ -28,14 +28,8 @@ namespace VerifyRedisLoaderWebApp
                 .ConfigureAppConfiguration(builder =>
                 {
                     /*
-                     The example redis has following hash content:
-                       HSET "yaml_config" "name" "redis tutorial"
-                       HSET "yaml_config" "description" "redis basic commands for caching"
-                       HSET "yaml_config" "likes" "20"
-                       HSET "yaml_config" "visitors" "23000"
-                       HSET "yaml_config" "test" "abc123"
+                     * Note: be sure to prepare a development redis server and load test data from the script file "db.test_content.redis"
                      */
-
                     builder.AddRedis(conn, redisHashKey, true, "aligala_curDbNum");
                 })
                 .UseStartup<Startup>();
