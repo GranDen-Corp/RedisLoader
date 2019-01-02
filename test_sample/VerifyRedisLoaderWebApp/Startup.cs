@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VerifyRedisLoaderWebApp.TypedOptions;
 
 namespace VerifyRedisLoaderWebApp
 {
@@ -31,6 +32,9 @@ namespace VerifyRedisLoaderWebApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.Configure<MissionMainDataOption>(option => Configuration.GetSection("Mission_MainData").Bind(option));
+            services.Configure<MissionRarityOption>(option => Configuration.GetSection("Mission_Rarity").Bind(option));
+            services.Configure<MissionTimeOption>(option => Configuration.GetSection("Mission_Time").Bind(option));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
