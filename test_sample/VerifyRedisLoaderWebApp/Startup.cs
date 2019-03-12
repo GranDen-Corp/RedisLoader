@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using VerifyRedisLoaderWebApp.TypedOptions;
 
 namespace VerifyRedisLoaderWebApp
@@ -32,16 +34,23 @@ namespace VerifyRedisLoaderWebApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.Configure<MissionMainDataOption>(option => Configuration.GetSection("Mission_MainData").Bind(option));
-            services.Configure<MissionRarityOption>(option => Configuration.GetSection("Mission_Rarity").Bind(option));
-            services.Configure<MissionTimeOption>(option => Configuration.GetSection("Mission_Time").Bind(option));
+            services.Configure<MissionMainDataOption>(Configuration.GetSection("Mission_MainData"));
+            services.Configure<MissionRarityOption>(Configuration.GetSection("Mission_Rarity"));
+            services.Configure<MissionTimeOption>(Configuration.GetSection("Mission_Time"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
+            IOptionsMonitor<MissionMainDataOption> missionMainDataOptionAccessor,
+            ILogger<Startup> logger)
         {
+            missionMainDataOptionAccessor.OnChange((x, s) =>
+            {
+                logger.LogInformation("option reloaded");
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
