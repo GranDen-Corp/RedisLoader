@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisLoader", "RedisLoader\RedisLoader.csproj", "{503182B5-1AD4-41FE-94EF-FED9F8AD1BD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisLoader", "src\RedisLoader\RedisLoader.csproj", "{503182B5-1AD4-41FE-94EF-FED9F8AD1BD7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F19B5031-1B5F-4C45-85F4-ED6230F73C1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{7EFF64E6-84A0-4FC3-8150-FEA201589B27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test_sample", "test_sample", "{1A73C799-485C-4CEA-BDA3-9520D1E8B280}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifyRedisLoaderWebApp", "test_sample\VerifyRedisLoaderWebApp\VerifyRedisLoaderWebApp.csproj", "{FB68A083-D256-4DF0-87EB-69182A67AFA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +23,17 @@ Global
 		{503182B5-1AD4-41FE-94EF-FED9F8AD1BD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{503182B5-1AD4-41FE-94EF-FED9F8AD1BD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{503182B5-1AD4-41FE-94EF-FED9F8AD1BD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB68A083-D256-4DF0-87EB-69182A67AFA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB68A083-D256-4DF0-87EB-69182A67AFA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB68A083-D256-4DF0-87EB-69182A67AFA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB68A083-D256-4DF0-87EB-69182A67AFA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{503182B5-1AD4-41FE-94EF-FED9F8AD1BD7} = {F19B5031-1B5F-4C45-85F4-ED6230F73C1C}
+		{FB68A083-D256-4DF0-87EB-69182A67AFA0} = {1A73C799-485C-4CEA-BDA3-9520D1E8B280}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4502FCB3-6E81-443C-9962-E6C314399E9F}
