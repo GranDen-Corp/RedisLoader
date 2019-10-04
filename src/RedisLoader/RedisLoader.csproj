@@ -4,26 +4,46 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>GranDen.RedisLoader</RootNamespace>
     <LangVersion>latest</LangVersion>
+    
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <Company>GranDen Inc.</Company>
+    <Authors>Isak Pao</Authors>
 
-    <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+    <Description>Redis DB setting reader for backend Game server</Description>
+
+    <Copyright>Copyright (c) 2019 GranDen Corp.(狂點軟體開發)</Copyright>
+
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/GranDen-Corp/RedisLoader.git</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
 
-    <!-- Optional: Embed source files that are not tracked by the source control manager in the PDB -->
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-
-    <!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
     <IncludeSymbols>true</IncludeSymbols>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageTags>Redis</PackageTags>
+    <PackageProjectUrl>https://www.nuget.org/packages/RedisLoader/</PackageProjectUrl>
   </PropertyGroup>
-  
+
   <Import Project="./version.props" />
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>./Redis.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>./Redis.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Redis.xml" />
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All"/>
     <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All" />
   </ItemGroup>
-
 </Project>
