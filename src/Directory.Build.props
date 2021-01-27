@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <Version Condition=" '$(Version)'=='' ">2.0.0</Version>
+    <PackageReleaseNotes>2.0.0 : 
+      &#xD;&#xA;1. Rename project into a formalized nuget package name
+      &#xD;&#xA;2. Update StackExchange.Redis lib
+      &#xD;&#xA;
+    </PackageReleaseNotes>
+  </PropertyGroup>
+</Project>

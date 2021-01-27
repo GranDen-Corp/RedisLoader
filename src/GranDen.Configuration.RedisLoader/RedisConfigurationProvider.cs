@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using StackExchange.Redis;
 
-namespace GranDen.RedisLoader
+namespace GranDen.Configuration.RedisLoader
 {
     /// <inheritdoc />
     /// <summary>

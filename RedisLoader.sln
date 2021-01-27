@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisLoader", "src\RedisLoader\RedisLoader.csproj", "{503182B5-1AD4-41FE-94EF-FED9F8AD1BD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GranDen.Configuration.RedisLoader", "src\GranDen.Configuration.RedisLoader\GranDen.Configuration.RedisLoader.csproj", "{503182B5-1AD4-41FE-94EF-FED9F8AD1BD7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F19B5031-1B5F-4C45-85F4-ED6230F73C1C}"
 EndProject
