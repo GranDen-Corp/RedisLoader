@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using StackExchange.Redis;
 
-namespace GranDen.RedisLoader
+namespace GranDen.Configuration.RedisLoader
 {
     /// <summary>
     /// Extension methods for adding <see cref="RedisConfigurationProvider"/>.
